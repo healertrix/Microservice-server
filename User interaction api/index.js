@@ -30,7 +30,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 require("dotenv").config();
 
-app.use('/interaction', routes);
+app.use('/', routes);
 
 const listener = app.listen(process.env.PORT || 4001, () => {
   console.log("User service is listening on port " + listener.address().port);

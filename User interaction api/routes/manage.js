@@ -74,7 +74,7 @@ const routes = express.Router();
 
  /**
  * @swagger
- * /interaction/like:
+ * /like:
  *   post:
  *     summary: Acknowledges like to particular content and inserts entry into db
  *     tags: [UserInteraction]
@@ -102,7 +102,7 @@ routes.post('/like', async (req, res) => {
 
  /**
  * @swagger
- * /interaction/read:
+ * /read:
  *   post:
  *     summary: Acknowledges read to particular content and inserts entries into db
  *     tags: [UserInteraction]
@@ -129,7 +129,7 @@ routes.post("/read", async (req, res) => {
 
 /**
  * @swagger
- * /interaction:
+ * /:
  *   get:
  *     summary: get all interaction data
  *     tags: [UserInteraction]
@@ -148,7 +148,7 @@ routes.get('/',  (req, res) => {
 
  /**
  * @swagger
- * /interaction/read:
+ * /read:
  *   post:
  *     summary: Acknowledges read to particular content and inserts entries into db
  *     tags: [UserInteraction]
@@ -168,7 +168,7 @@ routes.get('/',  (req, res) => {
 
 /**
  * @swagger
- * /interaction:
+ * /:
  *  put:
  *    summary: Update the content by the id
  *    tags: [UserInteraction]

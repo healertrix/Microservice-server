@@ -114,7 +114,7 @@ const { getInteractions } = require('../controllers/interaction');
 
 /**
  * @swagger
- * /content:
+ * /:
  *   post:
  *     summary: Create a new content
  *     tags: [Content]
@@ -146,7 +146,7 @@ routes.post('/', (req, res) => {
 
 /**
  * @swagger
- * /content/{id}:
+ * /{id}:
  *   get:
  *     summary: Get the content by id
  *     tags: [Content]
@@ -179,7 +179,7 @@ routes.get('/:id', (req, res) => {
 
 /**
  * @swagger
- * /content/{id}:
+ * /{id}:
  *  put:
  *    summary: Update the content by the id
  *    tags: [Content]
@@ -224,7 +224,7 @@ routes.put('/:id', (req, res) => {
 
 /**
  * @swagger
- * /content/{id}:
+ * /{id}:
  *   delete:
  *     summary: Remove the content by id
  *     tags: [Content]
@@ -262,7 +262,7 @@ routes.delete('/:id', (req, res) => {
 
 /**
  * @swagger
- * /content/upload:
+ * /upload:
  *  post:
  *    summary: Upload csv file to server
  *    tags: [Content]

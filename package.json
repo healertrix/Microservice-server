@@ -1,0 +1,26 @@
+{
+  "name": "microservice-server",
+  "version": "1.0.0",
+  "description": "",
+  "main": "proxy.js",
+  "scripts": {
+    "start":"nodemon proxy.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/healertrix/Microservice-server.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/healertrix/Microservice-server/issues"
+  },
+  "homepage": "https://github.com/healertrix/Microservice-server#readme",
+  "dependencies": {
+    "express": "^4.17.2",
+    "express-http-proxy": "^1.6.3",
+    "nodemon": "^2.0.15",
+    "simple-http-proxy": "^0.5.11"
+  }
+}

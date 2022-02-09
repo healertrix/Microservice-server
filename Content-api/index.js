@@ -34,7 +34,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 require('dotenv').config();
 
-app.use('/content', routes);
+app.use('/', routes);
 
 const listener = app.listen(process.env.PORT || 4002, () => {
     console.log("Content service is listening on port "+listener.address().port);

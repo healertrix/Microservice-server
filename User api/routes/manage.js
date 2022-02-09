@@ -45,6 +45,44 @@ const {
 
 
 
+/**
+ * @swagger
+ * components:
+ *   schemas:
+ *     UserId:
+ *       type: object
+ *       required:
+ *         - _id
+ *         - fname
+ *         - lname
+ *         - email
+ *         - phno
+ *       properties:
+ *         fname:
+ *           type: string
+ *           description: first name
+ *         lname:
+ *           type: string
+ *           description: last name
+ *         email:
+ *           type: string
+ *           description: user email
+ *         phno:
+ *           type: string
+ *           description: The phone number
+ *         _id:
+ *           type: string
+ *           description: id of user     
+ *       example:
+ *         fname: Alex
+ *         lname: Dudley
+ *         email: abc@gmail.com
+ *         phno : 1111111
+ *         _id  : e3c057fee2824329ae75f88cb75e019b
+ */
+
+
+
  /**
   * @swagger
   * tags:
@@ -56,7 +94,7 @@ const {
 
  /**
  * @swagger
- * /user:
+ * /:
  *   post:
  *     summary: Create a new user
  *     tags: [User]
@@ -86,7 +124,7 @@ routes.post("/", (req, res) => {
 
 /**
  * @swagger
- * /user/{id}:
+ * /{id}:
  *   get:
  *     summary: Get the user by id
  *     tags: [User]
@@ -118,7 +156,7 @@ routes.get('/:id', (req, res) => {
 
 /**
  * @swagger
- * /user/{id}:
+ * /{id}:
  *  put:
  *    summary: Update the user by the id
  *    tags: [User]
@@ -178,10 +216,9 @@ routes.put('/:id', (req, res) => {
 });
 
 
-
 /**
  * @swagger
- * /user/{id}:
+ * /{id}:
  *   delete:
  *     summary: Remove the content by id
  *     tags: [User]
