@@ -9,7 +9,7 @@ const addContent = async (title, story, last_modified) => {
         story: story,
         last_modified: last_modified
     };
-    db.content.save([Content]);
+  db.content.save([Content]);
     console.log("data inserted into contentdb");
 };
 const updateContent =  (id,title, story,last_modified) => {

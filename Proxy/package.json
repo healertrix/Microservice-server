@@ -4,11 +4,7 @@
   "description": "",
   "main": "proxy.js",
   "scripts": {
-    "content": "cd Content-api && npm start ",
-    "user": "cd User-api && npm start",
-    "interaction": "cd User-interaction-api && npm start",
-    "proxy": "nodemon proxy.js",
-    "start": "concurrently \"npm run content\" \"npm run user\" \"npm run interaction\" \"npm run proxy\""
+    "start": "nodemon index.js"
   },
   "repository": {
     "type": "git",

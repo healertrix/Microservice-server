@@ -126,11 +126,7 @@ const { getInteractions } = require('../controllers/interaction');
  *             $ref: '#/components/schemas/PostContent'
  *     responses:
  *       200:
- *         description: The content was successfully added
- *         content:
- *           application/json:
- *             schema:
- *               $ref: '#/components/schemas/PostContent'
+ *         description: The content was successfully added              $ref: '#/components/schemas/PostContent'
  *       500:
  *         description: Some server error
  */
@@ -160,10 +156,6 @@ routes.post('/', (req, res) => {
  *     responses:
  *       200:
  *         description: The content description by id
- *         content:
- *           application/json:
- *             schema:
- *               $ref: '#/components/schemas/Content'
  *       404:
  *         description: The content was not found
  */
