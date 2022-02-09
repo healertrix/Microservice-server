@@ -255,36 +255,6 @@ routes.delete('/:id', (req, res) => {
 });
 
 
-/**
- * @swagger
- * /content:
- *   post:
- *     summary: Create a new content
- *     tags: [Content]
- *     requestBody:
- *       required: true
- *       content:
- *         multipart/form-data:
- *           schema:
- *             type: object
- *            properties:
- *             orderId:
- *             type: integer
- *            userId:
- *             type: integer
- *            fileName:
- *             type: string
- *             format: binary      
- *     responses:
- *       200:
- *         description: The content was successfully added
- *         content:
- *           application/json:
- *             schema:
- *               $ref: '#/components/schemas/PostContent'
- *       500:
- *         description: Some server error
- */
 
 
 
@@ -349,7 +319,7 @@ routes.post("/upload", async (req, res)=> {
 
 /**
  * @swagger
- * /content//sort/new:
+ * /content/sort/new:
  *   get:
  *     summary: Get the content sorted on date
  *     tags: [Content]

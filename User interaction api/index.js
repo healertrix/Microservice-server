@@ -7,7 +7,7 @@ const options = {
   definition: {
     openapi: "3.0.0",
     info: {
-      title: "Contents Service API",
+      title: "User interaction Service API",
       version: "1.0.0",
       description: "User Interaction Microservice API",
     },
