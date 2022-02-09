@@ -4,7 +4,11 @@
   "description": "",
   "main": "proxy.js",
   "scripts": {
-    "start":"nodemon proxy.js"
+    "content": "cd Content-api && npm start ",
+    "user": "cd User-api && npm start",
+    "interaction": "cd User-interaction-api && npm start",
+    "proxy": "nodemon proxy.js",
+    "start": "concurrently \"npm run content\" \"npm run user\" \"npm run interaction\" \"npm run proxy\""
   },
   "repository": {
     "type": "git",
@@ -18,6 +22,7 @@
   },
   "homepage": "https://github.com/healertrix/Microservice-server#readme",
   "dependencies": {
+    "concurrently": "^7.0.0",
     "express": "^4.17.2",
     "express-http-proxy": "^1.6.3",
     "nodemon": "^2.0.15",
