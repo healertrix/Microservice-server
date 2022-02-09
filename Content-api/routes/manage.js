@@ -126,7 +126,7 @@ const { getInteractions } = require('../controllers/interaction');
  *             $ref: '#/components/schemas/PostContent'
  *     responses:
  *       200:
- *         description: The content was successfully added              $ref: '#/components/schemas/PostContent'
+ *         description: The content was successfully added
  *       500:
  *         description: Some server error
  */
