@@ -1,6 +1,7 @@
 //jshint esversion:8
 const express = require('express');
 
+
 const routes = express.Router();
 const {
   addUser,
@@ -44,6 +45,22 @@ const {
  */
 
 
+/**
+ * @swagger
+ * components:
+ *   schemas:
+ *     PostRes:
+ *       type: object
+ *       required:
+ *         - id
+ *       properties:
+ *         id:
+ *           type: string
+ *           description: the id of inserted user
+ *       example:
+ *         _id: "5bb74e3eea474bf3ab09ac427bf2cb05"
+ */
+
 
 /**
  * @swagger
@@ -81,7 +98,27 @@ const {
  *         _id  : e3c057fee2824329ae75f88cb75e019b
  */
 
-
+/**
+ * @swagger
+ * components:
+ *   schemas:
+ *     PutUser:
+ *       type: object
+ *       required:
+ *         - _id
+ *         - updated
+ *       properties:
+ *         _id:
+ *           type: string
+ *           description: The auto-generated id of the content
+ *         updated:
+ *           type: boolean
+ *           description: status of update operation
+ *       example:
+ *         _id: 94c7f94a8bae46f290ad5312ad2d07f5
+ *         updated: true
+ * 
+ */
 
  /**
   * @swagger
@@ -105,17 +142,24 @@ const {
  *           schema:
  *             $ref: '#/components/schemas/User'
  *     responses:
- *       200:
- *         description: The content was successfully added
+ *       201:
+ *         description: The User was successfully added
+ *         content:
+ *          application/json:
+ *            schema:
+ *              $ref: '#/components/schemas/PostRes'
  *       500:
  *         description: Some server error
  */
-routes.post("/", (req, res) => {
+routes.post("/", async (req, res) => {
     console.log(req.body);
     const { fname, lname, email, phno
     } = req.body;
-    addUser(fname, lname, email, phno);
-    res.send("Data inserted into User db");
+  const id = await addUser(fname, lname, email, phno);
+  const result = {
+    _id: id
+  };
+    res.status(201).send(result);
 });
 
 
@@ -141,16 +185,20 @@ routes.post("/", (req, res) => {
  *         content:
  *           application/json:
  *             schema:
- *               $ref: '#/components/schemas/User'
+ *               $ref: '#/components/schemas/UserId'
  *       404:
  *         description: The content was not found
  */
 
-routes.get('/:id', (req, res) => {
+routes.get('/:id', async (req, res) => {
     const _id = req.params.id;
-    const user = getUserbyId(_id);
-    console.log(user);
-    res.send(user);
+    const result = await getUserbyId(_id);
+  if (result == 404) {
+    res.status(404).send("User not found");
+  } else {
+    
+    res.status(200).send(result);
+  }
 });
 
 
@@ -188,31 +236,30 @@ routes.get('/:id', (req, res) => {
  *          type: string
  *        description: phone number 
  *    responses:
- *      200:
- *        description: The user was updated
+ *      201:
+ *        description: The content has been added
+ *        content:
+ *          application/json:
+ *            schema:
+ *              $ref: '#/components/schemas/PutUser'             
  *      404:
- *        description: The user was not found
+ *        description: The content was not found
  *      500:
  *        description: Some error happened
  */
 
 
-routes.put('/:id', (req, res) => {
+routes.put('/:id', async (req, res) => {
     const _id = req.params.id;
     const { fname, lname, email, phno } = req.query;
-    if (fname) { 
-        updateUserbyId(_id,"fname",fname);
+    const result = await updateUserbyId(_id, fname, lname, email, phno);
+    if (result == 404) {
+      res.status(404).send("User was not found! Error");
+    } else if (result == 500) {
+      res.status(500).send("Server Error!!");
+    } else {
+      res.status(201).send(result);
     }
-    if (lname) {
-      updateUserbyId(_id, "lname", lname);
-    }
-    if (email) {
-      updateUserbyId(_id, "email", email);
-    }
-    if (phno) {
-      updateUserbyId(_id, "phno", phno);
-    }
-    res.send("updated data");
 });
 
 
@@ -236,10 +283,15 @@ routes.put('/:id', (req, res) => {
  *       404:
  *         description: The user was not found
  */
-routes.delete('/:id', (req, res) => {
+routes.delete('/:id', async (req, res) => {
     const _id = req.params.id;
-    removeUserbyId(_id);
-    res.send("user deleted");
+  const user = await removeUserbyId(_id);
+   if (user == 404) {
+     res.status(404).send("User not found");
+   } else {
+     res.status(200).send("User has been deleted");
+   }
+
 });
 
 module.exports = routes;

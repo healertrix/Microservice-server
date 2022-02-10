@@ -3,37 +3,69 @@ const db = require("diskdb");
 db.connect("db", ["users"]);
 
 
-const addUser = (fname, lname, email, phno) => {
-
-    const User = { fname: fname, lname: lname, email: email, phno: phno };
-    db.users.save([User]);
-    console.log("data inserted into userdb");
+const addUser = async (fname, lname, email, phno) => {
+  const User = { fname: fname, lname: lname, email: email, phno: phno };
+  db.users.save([User]);
+  const res = await db.users.findOne({
+    fname: fname,
+    lname: lname,
+    email: email,
+    phno: phno,
+  });
+  console.log("data inserted into userdb");
+  return res._id;
 };
 
 // addUser("abc", "xyz", "abc@gmail.com", "7845");
 
-const getUserbyId = (id) => {
-    return db.users.findOne({ _id: id });
+const getUserbyId = async (id) => {
+  const result = await db.users.findOne({ _id: id });
+  if (result === undefined) {
+    return 404;
+  } else {
+    return result;
+  }
 };
 
-const removeUserbyId = (id) => {
-    db.users.remove({ _id: id }, false); // remove only the first match
-    console.log("removed user id : "+id+" ");
+const removeUserbyId = async (id) => {
+   const result = await db.users.findOne({ _id: id });
+   if (result === undefined) {
+     return 404;
+   } else {
+     const del = await db.users.remove({ _id: id });
+     return 200;
+   }
 };
 
-const updateUserbyId = (id,title,value) => {
-    options = {
-      multi: false, // update multiple - default false
-      upsert: false, // if object is not found, add it (update-insert) - default false
-    };
-    const query = {
+const updateUserbyId = async (id, fname, lname, email, phno) => {
+  const checkExistence = await db.users.findOne({ _id: id });
+  console.log(checkExistence);
+  if (checkExistence == undefined) {
+    return 404;
+  }
+  options = {
+    multi: false, // update multiple - default false
+    upsert: false, // if object is not found, add it (update-insert) - default false
+  };
+  const query = {
+    _id: id,
+  };
+  const dataToBeUpdate = {
+    fname: fname ? fname : db.users.findOne({ _id: id }).fname,
+    story: lname ? lname : db.users.findOne({ _id: id }).lname,
+    email: email ? email : db.users.findOne({ _id: id }).email,
+    phno: phno ? phno : db.users.findOne({ _id: id }).phno,
+  };
+  const updated = db.users.update(query, dataToBeUpdate, options);
+  const status = updated.updated;
+  if (status) {
+    return {
       _id: id,
+      updated: true,
     };
-    const dataToBeUpdate = {
-      [title]: value,
-    };
-    const updated = db.users.update(query, dataToBeUpdate, options);
-    console.log(updated);
+  } else {
+    return 500;
+  }
 };
 // updateUserbyId("d1be0c1a9efe44789cbfc7cb8a8faf02","fname","anshu");
 
