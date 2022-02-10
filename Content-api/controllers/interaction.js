@@ -4,7 +4,7 @@ const db = require("diskdb");
 db.connect("db", ["content"]);
 async function getInteractions() {
   try {
-    const response = await axios.get("http://localhost:4001");
+    const response = await axios.get("http://interaction:4001");
     const interaction = response.data;
     // return interaction;
     const finalIntr = [];

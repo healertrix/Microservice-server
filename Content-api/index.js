@@ -15,7 +15,7 @@ const options = {
     },
     servers: [
       {
-        url: `http://localhost:${process.env.PORT || 4002}`,
+        url: `http://content:${process.env.PORT || 4002}`,
       },
     ],
   },
