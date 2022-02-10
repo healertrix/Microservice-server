@@ -26,7 +26,7 @@ const { getInteractions } = require('../controllers/interaction');
  *       properties:
  *         _id:
  *           type: string
- *           description: The auto-generated id of the book
+ *           description: The auto-generated id of the content
  *         title:
  *           type: string
  *           description: The content title
@@ -43,6 +43,30 @@ const { getInteractions } = require('../controllers/interaction');
  *         _id: 2e5d6f969dd940f485565e048b790a55
  * 
  */
+
+/**
+ * @swagger
+ * components:
+ *   schemas:
+ *     PutContent:
+ *       type: object
+ *       required:
+ *         - _id
+ *         - updated
+ *       properties:
+ *         _id:
+ *           type: string
+ *           description: The auto-generated id of the content
+ *         updated:
+ *           type: boolean
+ *           description: status of update operation
+ *       example:
+ *         _id: 94c7f94a8bae46f290ad5312ad2d07f5
+ *         updated: true
+ * 
+ */
+
+
 /**
  * @swagger
  * components:
@@ -125,18 +149,26 @@ const { getInteractions } = require('../controllers/interaction');
  *           schema:
  *             $ref: '#/components/schemas/PostContent'
  *     responses:
- *       200:
- *         description: The content was successfully added
+ *       201:
+ *         description: The content has been added
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/Content'
  *       500:
  *         description: Some server error
  */
 
 
-routes.post('/', (req, res) => {
+routes.post('/', async (req, res) => {
     const { title, story } = req.body;
-    const last_modified = Date.now();
-    addContent(title, story, last_modified);
-    res.send("Data inserted into contentdb");
+  const last_modified = Date.now();
+      const response = await addContent(title, story, last_modified);
+  if (Object.keys(response).length != 0) {
+    res.status(201).send(response);
+  } else {
+    res.status(500).send("Data was not added . Error ! ");
+  }
 });
 
 
@@ -154,15 +186,24 @@ routes.post('/', (req, res) => {
  *         required: true
  *         description: The content id
  *     responses:
- *       200:
- *         description: The content description by id
- *       404:
- *         description: The content was not found
+ *      200:
+ *       description: The content has been added
+ *       content:
+ *         application/json:
+ *           schema:
+ *             $ref: '#/components/schemas/Content'   
+ *      404:
+ *        description: The content was not found
  */
-routes.get('/:id', (req, res) => {
+routes.get('/:id', async (req, res) => {
     const id = req.params.id;
-    const content = getContentbyId(id);
-    res.send(content);
+    const content = await getContentbyId(id);
+  if (content == 404) {
+    res.status(404).send("Content not found");
+  }
+  else {
+    res.status(200).send(content);
+   }
 });
 
 
@@ -193,8 +234,12 @@ routes.get('/:id', (req, res) => {
  *          type: string
  *        description: The content of story
  *    responses:
- *      200:
- *        description: The content was updated
+ *      201:
+ *        description: The content has been added
+ *        content:
+ *          application/json:
+ *            schema:
+ *              $ref: '#/components/schemas/PutContent'             
  *      404:
  *        description: The content was not found
  *      500:
@@ -203,12 +248,21 @@ routes.get('/:id', (req, res) => {
 
 
 
-routes.put('/:id', (req, res) => {
+routes.put('/:id', async (req, res) => {
     const { title, story } = req.query;
     const id = req.params.id;
     const last_modified = Date.now();
-    updateContent(id, title, story, last_modified);
-    res.send("Data has been updated");
+  const result = await updateContent(id, title, story, last_modified);
+  console.log(result);
+  if (result == 404) {
+    res.status(404).send("Content was not found! Error");
+  }
+  else if (result == 500) {
+    res.status(500).send("Server Error!!");
+  }
+  else {
+    res.status(201).send(result);
+  }
 });
 
 
@@ -230,19 +284,26 @@ routes.put('/:id', (req, res) => {
  * 
  *     responses:
  *       200:
- *         description: The book was deleted
+ *         description: The content was deleted
  *       404:
- *         description: The book was not found
+ *         description: The content was not found
  */
 
 
 
 
 
-routes.delete('/:id', (req, res) => {
+routes.delete('/:id', async (req, res) => {
     const id = req.params.id;
-    deleteContentbyId(id);
-    res.send("Content has been deleted");
+  
+  const content = await deleteContentbyId(id);
+  console.log(content);
+  if (content == 404) {
+    res.status(404).send("Content not found");
+  }
+  else {
+    res.status(200).send("Content has been deleted");
+   }
 
 });
 
@@ -269,8 +330,6 @@ routes.delete('/:id', (req, res) => {
  *    responses:
  *      200:
  *        description: The csv file content added in database
- *      404:
- *        description: The content was not found
  *      500:
  *        description: Some error happened
  */
@@ -311,7 +370,7 @@ routes.post("/upload", async (req, res)=> {
 
 /**
  * @swagger
- * /content/sort/new:
+ * /sort/new:
  *   get:
  *     summary: Get the content sorted on date
  *     tags: [Content]
@@ -335,7 +394,7 @@ routes.get("/sort/new", (req, res) => {
 
 /**
  * @swagger
- * /content/sort/interaction:
+ * /sort/interaction:
  *   get:
  *     summary: Get the content sorted on interaction
  *     tags: [Content]
