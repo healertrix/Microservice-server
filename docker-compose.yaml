@@ -1,0 +1,38 @@
+version: '3'
+services:
+
+
+  user:
+   image: healertrix/user
+   ports:
+    - 4000:4000
+
+  interaction:
+   image: healertrix/interaction
+   ports:
+    - 4001:4001
+   links:
+     - user
+
+
+  
+
+
+
+  
+  content:
+   image: healertrix/content
+   ports:
+    - 4002:4002
+ 
+
+  
+  proxy:
+   image: healertrix/proxy
+   ports:
+    - 8080:8080
+   links:
+    - user
+    - interaction
+    - content  
+

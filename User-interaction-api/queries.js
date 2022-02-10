@@ -63,7 +63,7 @@ const getInteractions =  () => {
 
 async function getUser(id) {
   try {
-      const response = await axios.get(`http://localhost:4000/user/${id}`);
+      const response = await axios.get(`http://user:4000/user/${id}`);
       const { fname, lname, email, phno, _id } = response.data;
       if ((fname && lname && email && phno && _id)) { 
           console.log(response.data);
