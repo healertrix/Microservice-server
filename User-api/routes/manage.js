@@ -250,9 +250,9 @@ routes.get('/:id', async (req, res) => {
 
 
 routes.put('/:id', async (req, res) => {
-    const _id = req.params.id;
+    const id = req.params.id;
     const { fname, lname, email, phno } = req.query;
-    const result = await updateUserbyId(_id, fname, lname, email, phno);
+    const result = await updateUserbyId(id, fname, lname, email, phno);
     if (result == 404) {
       res.status(404).send("User was not found! Error");
     } else if (result == 500) {

@@ -52,7 +52,7 @@ const updateUserbyId = async (id, fname, lname, email, phno) => {
   };
   const dataToBeUpdate = {
     fname: fname ? fname : db.users.findOne({ _id: id }).fname,
-    story: lname ? lname : db.users.findOne({ _id: id }).lname,
+    lname: lname ? lname : db.users.findOne({ _id: id }).lname,
     email: email ? email : db.users.findOne({ _id: id }).email,
     phno: phno ? phno : db.users.findOne({ _id: id }).phno,
   };
