@@ -1,0 +1,474 @@
+{
+	"info": {
+		"_postman_id": "0d1863b7-dee5-48a6-a77e-0a53f0cb71e9",
+		"name": "Microservice Assignment",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "User interaction",
+			"item": [
+				{
+					"name": "get interaction",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/interaction/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"interaction",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update interaction",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:4001/interaction/story/123?event=read&flag=true&user_id=e3c057fee2824329ae75f88cb75e019b",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "4001",
+							"path": [
+								"interaction",
+								"story",
+								"123"
+							],
+							"query": [
+								{
+									"key": "event",
+									"value": "read"
+								},
+								{
+									"key": "flag",
+									"value": "true"
+								},
+								{
+									"key": "user_id",
+									"value": "e3c057fee2824329ae75f88cb75e019b"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "add interaction read",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"story_id\": \"a335c79a626b42fc8fad35b97d11ec71\",\r\n  \"user_id\": \"8178eea98d9543a5ae115c94adbc0c4a\",\r\n  \"read\": 1\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/interaction/read",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"interaction",
+								"read"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "add interaction like",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"story_id\": \"a335c79a626b42fc8fad35b97d11ec71\",\r\n  \"user_id\": \"8178eea98d9543a5ae115c94adbc0c4a\",\r\n  \"read\": 1000\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/interaction/like",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"interaction",
+								"like"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "New Request",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/interaction/944db5ec8387489c9d5e03f16e073530",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"interaction",
+								"944db5ec8387489c9d5e03f16e073530"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "User",
+			"item": [
+				{
+					"name": "adduser",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"fname\":\"Elon\", \"lname\":\"Musk\", \"email\":\"elon@gmail.com\", \"phno\":\"77777777\"}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/user",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"user"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getuser",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"apple\":\"hello buyers\"}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/user/c9774bd75adf4173a9cf15c8e42d59d2",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"user",
+								"c9774bd75adf4173a9cf15c8e42d59d2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "updateuser",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/user/c9774bd75adf4173a9cf15c8e42d59d2?fname=MIKE&lname=POSNER&email=MIke@Pose.com&phno=9999999",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"user",
+								"c9774bd75adf4173a9cf15c8e42d59d2"
+							],
+							"query": [
+								{
+									"key": "fname",
+									"value": "MIKE"
+								},
+								{
+									"key": "lname",
+									"value": "POSNER"
+								},
+								{
+									"key": "email",
+									"value": "MIke@Pose.com"
+								},
+								{
+									"key": "phno",
+									"value": "9999999"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete user by Id",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/user/5728ec9a08ba4af3938d50310e45f640",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"user",
+								"5728ec9a08ba4af3938d50310e45f640"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Content",
+			"item": [
+				{
+					"name": "adduser",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"title\":\"Diary of a wimpy kid\",\"story\":\"Kinney spent eight years working on the book before showing it to a publisher\"}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/content",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"content"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getuserContentByid",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/content/94c7f94a8bae46f290ad5312ad2d07f5",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"content",
+								"94c7f94a8bae46f290ad5312ad2d07f5"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "updateUser",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/content/94c7f94a8bae46f290ad5312ad2d07f5?id=a418f5e2ea2549f1af1d18c76dff76fc&title=THE TRAIN&story=A moving train",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"content",
+								"94c7f94a8bae46f290ad5312ad2d07f5"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "a418f5e2ea2549f1af1d18c76dff76fc"
+								},
+								{
+									"key": "title",
+									"value": "THE TRAIN"
+								},
+								{
+									"key": "story",
+									"value": "A moving train"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "deleteUser",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/content/a335c79a626b42fc8fad35b97d11ec71",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"content",
+								"a335c79a626b42fc8fad35b97d11ec71"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "postCSV",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "",
+								"value": "",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "csv",
+									"type": "file",
+									"src": "/C:/Users/abhin/Downloads/demo - Sheet1 (1).csv"
+								},
+								{
+									"key": "abc",
+									"value": "asd",
+									"type": "text",
+									"disabled": true
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:8080/content/upload",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"content",
+								"upload"
+							],
+							"query": [
+								{
+									"key": "",
+									"value": null,
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "sortedBydate",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/content/sort/new",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"content",
+								"sort",
+								"new"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "sortedByinteractions",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/content/sort/interaction",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"content",
+								"sort",
+								"interaction"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"variable": [
+		{
+			"key": "id value content",
+			"value": "94c7f94a8bae46f290ad5312ad2d07f5"
+		}
+	]
+}

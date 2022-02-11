@@ -67,6 +67,6 @@ const updateUserbyId = async (id, fname, lname, email, phno) => {
     return 500;
   }
 };
-// updateUserbyId("d1be0c1a9efe44789cbfc7cb8a8faf02","fname","anshu");
+
 
 module.exports = { addUser, updateUserbyId, removeUserbyId, getUserbyId };
